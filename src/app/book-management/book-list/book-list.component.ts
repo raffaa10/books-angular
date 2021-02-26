@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {BOOKS, FORMATS} from '../model/book-mock-data';
+import {FORMATS} from '../model/book-mock-data';
 import {Book} from '../model/book';
+import { BooksService } from '../service/books.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class BookListComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor() { }
+  constructor(private booksService: BooksService) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -37,14 +38,18 @@ export class BookListComponent implements OnInit, AfterViewInit  {
   }
 
 
-  private getBooks(): void{
-    this.dataSource.data = BOOKS;
-    if (this.formatSelected !== '') {
-      this.dataSource.data = this.dataSource.data.filter( book =>
-        book.format === this.formatSelected
-      );
-    }
+  private getBooks(): void {
+    this.booksService.getBooks().subscribe( books => {
+      if (this.formatSelected !== '') {
+        this.dataSource.data = books.filter(book =>
+          book.format === this.formatSelected
+        );
+      } else {
+        this.dataSource.data = books;
+      }
+    });
   }
+
 
   formatChanged($event): void {
     this.formatSelected = $event.value;
