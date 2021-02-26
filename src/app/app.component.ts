@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'books-management';
+
+  x = 10;
+  y = 20;
+  add(x, y): number{
+    return x + y;
+  }
 }
