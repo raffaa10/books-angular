@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {FORMATS} from '../model/book-mock-data';
 import {Book} from '../model/book';
 import { BooksService } from '../service/books.service';
+import {ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,18 +15,21 @@ import { BooksService } from '../service/books.service';
 })
 export class BookListComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns: string[] = ['title', 'publicationyear', 'format', 'price'];
+  displayedColumns: string[] = ['title', 'publicationyear', 'format', 'price', 'action'];
   dataSource = new MatTableDataSource<Book>([]);
 
   formats = FORMATS;
   formatSelected = '';
 
+  book: Book;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
-  constructor(private booksService: BooksService) { }
+  constructor(private booksService: BooksService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -35,6 +39,16 @@ export class BookListComponent implements OnInit, AfterViewInit  {
     this.dataSource.filterPredicate = (data: Book, filter: string) =>
     this.filterPredicate(data, filter);
     this.getBooks();
+  }
+
+  private getBook(): void {
+    const isbn = this.route.snapshot.paramMap.get('id');
+    this.booksService.getBook(isbn).subscribe(
+      book => {
+        this.book = book;
+        console.log('BookDetail getBook =', book);
+      }
+    );
   }
 
 
@@ -68,6 +82,20 @@ export class BookListComponent implements OnInit, AfterViewInit  {
     const filterValue = ($event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  edit(isbn: string): void {
+    this.router.navigate(['/book', isbn]).then((e) => {
+      if (!e) {
+        console.log('Navigation has failed!');
+      }
+    });
+  }
+
+  delete(isbn: string): void {
+    alert('delete :' + isbn);
+  }
+
+
 
 
 

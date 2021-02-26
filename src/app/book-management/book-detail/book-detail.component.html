@@ -1,0 +1,91 @@
+<app-navbar>
+  <h3 class="mat-h3">
+    <button mat-icon-button (click)="goToBooks()">
+      <mat-icon aria-label="Accueil">arrow_back</mat-icon>
+    </button>
+    Edition d'un livre
+  </h3>
+
+  <section class="loading" *ngIf="processLoadRunning==true">
+    <mat-spinner diameter="25" ></mat-spinner>
+    <span>&nbsp; En cours de chargement ...</span>
+  </section>
+
+  <form class="book-form" *ngIf="processLoadRunning==false"
+        [formGroup]="bookForm"
+        (ngSubmit)="onSubmitForm()"
+  >
+
+    <table class="book-full-width">
+      <tr>
+        <td>
+          <mat-form-field class="book-full-width">
+            <input matInput class="form-control" placeholder="ISBN du livre"
+                   id="isbn" formControlName="isbn" required
+            />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="book-full-width">
+            <mat-label>Editeur</mat-label>
+
+            <mat-select
+              id="publisherId" formControlName="publisherId"
+            >
+              <mat-option *ngFor="let publisher of publishers" value="{{ publisher.id }}">{{ publisher.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="book-full-width">
+            <input matInput class="form-control" placeholder="Titre du livre"
+                   id="title" formControlName="title" required
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <table class="book-full-width">
+      <tr>
+        <td>
+          <mat-form-field class="book-full-width">
+            <mat-label>Date de publication</mat-label>
+            <input matInput [matDatepicker]="picker"
+                   formControlName="publicationyear"
+                   required
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="book-full-width">
+            <mat-label>Format</mat-label>
+            <mat-select
+              id="format" formControlName="format"
+            >
+              <mat-option *ngFor="let format of formats" value="{{ format.value }}">{{ format.value }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="book-full-width">
+            <mat-label>Prix</mat-label>
+            <input matInput id="price" formControlName="price" required />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <div style="display:flex; justify-content:flex-end;">
+      <button type="submit" mat-stroked-button color="primary"
+              [disabled]="processValidateRunning || !isFormValid()" >
+        <mat-icon *ngIf="processValidateRunning">
+          <mat-spinner diameter="16"></mat-spinner>
+        </mat-icon>
+        Valider
+      </button>
+    </div>
+  </form>
+</app-navbar>

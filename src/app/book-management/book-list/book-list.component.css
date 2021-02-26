@@ -15,6 +15,10 @@ Le nom est formé de .mat-column-<nom de la colonne de la table> (voir html)
 .mat-column-price {
   width: 80px;
 }
+.mat-column-action {
+  width: 80px;
+}
+
 .toolbar-filter {
   display: flex;
   align-content: center;
@@ -22,3 +26,4 @@ Le nom est formé de .mat-column-<nom de la colonne de la table> (voir html)
   margin: 12px;
   width: 90%;
 }
+
