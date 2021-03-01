@@ -5,13 +5,15 @@ import { BookManagementRoutingModule } from './book-management-routing.module';
 import { BookComponent } from './book/book.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { BookDetailComponent } from './book-detail/book-detail.component';
+// import { BookDetailComponent } from './book-detail/book-detail.component';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookEditComponent } from './book-edit/book-edit.component';
+import { BookAddComponent } from './book-add/book-add.component';
 
 
 
 @NgModule({
-  declarations: [BookComponent, BookListComponent, NavbarComponent, BookDetailComponent],
+  declarations: [BookComponent, BookListComponent, NavbarComponent, /*BookDetailComponent,*/ BookEditComponent, BookAddComponent],
   exports: [
     BookComponent
   ],

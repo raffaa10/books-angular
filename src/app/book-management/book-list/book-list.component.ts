@@ -64,6 +64,14 @@ export class BookListComponent implements OnInit, AfterViewInit  {
     });
   }
 
+  addBook(): void {
+    this.router.navigate(['/book/add']).then( (e) => {
+      if (! e) {
+        console.log('Navigation has failed!');
+      }
+    });
+  }
+
 
   formatChanged($event): void {
     this.formatSelected = $event.value;

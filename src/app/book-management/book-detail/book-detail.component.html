@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="goToBooks()">
       <mat-icon aria-label="Accueil">arrow_back</mat-icon>
     </button>
-    Edition d'un livre
+    {{ addForm ? "Ajout d'un livre" : "Edition d'un livre" }}
   </h3>
 
   <section class="loading" *ngIf="processLoadRunning==true">

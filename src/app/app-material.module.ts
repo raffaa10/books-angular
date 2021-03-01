@@ -19,6 +19,21 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import * as moment from 'moment';
+
+const MY_FORMATS = {
+  parse: {
+    dateInput: ['l', 'LL'],
+  },
+  display: {
+    dateInput: 'L',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 
 @NgModule({
@@ -47,6 +62,12 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatMomentDateModule,
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500, verticalPosition: 'top'}}
+
   ]
 })
 export class AppMaterialModule { }
