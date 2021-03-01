@@ -51,7 +51,6 @@ export class BookListComponent implements OnInit, AfterViewInit  {
     );
   }
 
-
   private getBooks(): void {
     this.booksService.getBooks().subscribe( books => {
       if (this.formatSelected !== '') {
@@ -63,6 +62,7 @@ export class BookListComponent implements OnInit, AfterViewInit  {
       }
     });
   }
+
 
   addBook(): void {
     this.router.navigate(['/book/add']).then( (e) => {

@@ -7,9 +7,11 @@
   </h3>
 
   <section class="loading" *ngIf="processLoadRunning==true">
-    <mat-spinner diameter="25" ></mat-spinner>
+    <mat-spinner diameter="25"></mat-spinner>
     <span>&nbsp; En cours de chargement ...</span>
   </section>
+
+  <app-alert *ngIf="errorMessage.length>0" [type]="'danger'">{{ errorMessage }}</app-alert>
 
   <form class="book-form" *ngIf="processLoadRunning==false"
         [formGroup]="bookForm"
@@ -23,6 +25,7 @@
             <input matInput class="form-control" placeholder="ISBN du livre"
                    id="isbn" formControlName="isbn" required
             />
+            <mat-error>L'ISBN est requis (10 ou 13 chiffres)</mat-error>
           </mat-form-field>
         </td>
         <td>
@@ -32,7 +35,8 @@
             <mat-select
               id="publisherId" formControlName="publisherId"
             >
-              <mat-option *ngFor="let publisher of publishers" value="{{ publisher.id }}">{{ publisher.name }}</mat-option>
+              <mat-option *ngFor="let publisher of publishers" value="{{ publisher.id }}">{{ publisher.name }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
@@ -72,7 +76,7 @@
         <td>
           <mat-form-field class="book-full-width">
             <mat-label>Prix</mat-label>
-            <input matInput id="price" formControlName="price" required />
+            <input matInput id="price" formControlName="price" required/>
           </mat-form-field>
         </td>
       </tr>
@@ -80,7 +84,7 @@
 
     <div style="display:flex; justify-content:flex-end;">
       <button type="submit" mat-stroked-button color="primary"
-              [disabled]="processValidateRunning || !isFormValid()" >
+              [disabled]="processValidateRunning || !isFormValid()">
         <mat-icon *ngIf="processValidateRunning">
           <mat-spinner diameter="16"></mat-spinner>
         </mat-icon>

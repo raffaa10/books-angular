@@ -9,11 +9,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookAddComponent } from './book-add/book-add.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 
 @NgModule({
-  declarations: [BookComponent, BookListComponent, NavbarComponent, /*BookDetailComponent,*/ BookEditComponent, BookAddComponent],
+  declarations: [BookComponent, BookListComponent, NavbarComponent, /*BookDetailComponent,*/ BookEditComponent, BookAddComponent, AlertComponent],
   exports: [
     BookComponent
   ],

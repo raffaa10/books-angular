@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Book } from '../model/book';
 import { FORMATS } from '../model/book-mock-data';
 import { PUBLISHERS } from '../model/publisher-mock-data';
 import { BooksService } from '../service/books.service';
+import { isbnValidator } from './isbn-validator.directive';
 
 /*
 @Component({
@@ -24,13 +25,15 @@ export abstract class BookDetailComponent {
   processValidateRunning = false;
 
   bookForm = this.fb.group({
-    isbn: [''], // Valeur de départ vide
+    isbn: ['',[Validators.required, isbnValidator]], // Valeur de départ vide
     publisherId: ['0'],
     title: [''],
     format: [''],
     publicationyear: [''],
     price: [2]
   });
+
+  errorMessage = '';
 
 
   protected constructor (
@@ -53,11 +56,13 @@ export abstract class BookDetailComponent {
     return this.bookForm.get(name).value;
   }
 
+  /*
   private getBook(): void {
     const isbn = this.route.snapshot.paramMap.get('id');
 
     console.log('getBook= ' + isbn);
   }
+   */
 
   goToBooks(): void {
     this.router.navigate(['/book/list']);

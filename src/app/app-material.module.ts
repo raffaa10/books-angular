@@ -20,7 +20,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import * as moment from 'moment';
 
 const MY_FORMATS = {
@@ -62,6 +62,7 @@ const MY_FORMATS = {
     MatSlideToggleModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatSnackBarModule,
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
